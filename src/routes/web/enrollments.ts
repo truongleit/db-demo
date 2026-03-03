@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllEnrollments, createEnrollment, deleteEnrollment } from "../../models/enrollments";
+import { getAllEnrollmentsWithDetails, createEnrollment, deleteEnrollment } from "../../models/enrollments";
 import { getAllStudents } from "../../models/students";
 import { getAllCourses } from "../../models/courses";
 
@@ -7,8 +7,7 @@ export const webEnrollmentsRouter = Router();
 
 webEnrollmentsRouter.get("/", async (req, res) => {
   const error = req.query.error as string | undefined;
-  // For simplicity we re-use plain enrollments; join info is optional for the demo
-  const enrollments = await getAllEnrollments();
+  const enrollments = await getAllEnrollmentsWithDetails();
   res.render("enrollments/index", { enrollments, error });
 });
 

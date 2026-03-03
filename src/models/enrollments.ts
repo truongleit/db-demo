@@ -8,6 +8,38 @@ export interface Enrollment {
   grade?: string | null;
 }
 
+export async function getAllEnrollmentsWithDetails(filters?: {
+  student_id?: number;
+  course_id?: number;
+}) {
+  let sql = `
+    SELECT 
+      e.*,
+      CONCAT(s.first_name, ' ', s.last_name) AS student_name,
+      s.email AS student_email,
+      c.code AS course_code,
+      c.title AS course_title
+    FROM enrollments e
+    JOIN students s ON e.student_id = s.id
+    JOIN courses c ON e.course_id = c.id
+    WHERE 1=1
+  `;
+  const params: Array<number> = [];
+
+  if (filters?.student_id) {
+    sql += " AND e.student_id = ?";
+    params.push(filters.student_id);
+  }
+
+  if (filters?.course_id) {
+    sql += " AND e.course_id = ?";
+    params.push(filters.course_id);
+  }
+
+  const [rows] = await pool.query(sql, params);
+  return rows;
+}
+
 export async function getAllEnrollments(
   filters?: { student_id?: number | undefined; course_id?: number | undefined }
 ) {

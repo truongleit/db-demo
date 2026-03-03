@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
   createStudent,
   deleteStudent,
-  getAllStudents,
+  getAllStudentsWithDepartment,
   getStudentById,
   updateStudent,
 } from "../models/students";
@@ -12,7 +12,7 @@ export async function listStudents(req: Request, res: Response) {
     const departmentId = req.query.department_id
       ? Number(req.query.department_id)
       : undefined;
-    const students = await getAllStudents(departmentId);
+    const students = await getAllStudentsWithDepartment(departmentId);
     res.json({ data: students, error: null });
   } catch (err: any) {
     res.status(500).json({ data: null, error: { message: err.message } });

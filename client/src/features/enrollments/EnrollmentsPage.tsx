@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import {
@@ -54,8 +55,8 @@ export function EnrollmentsPage() {
       setEnrollments(enr);
       setStudents(sts);
       setCourses(crs);
-    } catch (e: any) {
-      setError(e.message ?? "Failed to load enrollments");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to load enrollments");
     } finally {
       setLoading(false);
     }
@@ -81,8 +82,8 @@ export function EnrollmentsPage() {
         grade: "",
       });
       await load();
-    } catch (e: any) {
-      setError(e.message ?? "Failed to create enrollment");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to create enrollment");
     }
   }
 
@@ -91,8 +92,8 @@ export function EnrollmentsPage() {
     try {
       await deleteEnrollment(id);
       await load();
-    } catch (e: any) {
-      setError(e.message ?? "Failed to delete enrollment");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to delete enrollment");
     }
   }
 
@@ -179,8 +180,8 @@ export function EnrollmentsPage() {
           All enrollments
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
-            <thead className="bg-black/5 dark:bg-black/40">
+          <table className="app-table text-sm">
+            <thead>
               <tr>
                 <th className="border-b border-[var(--border)] px-3 py-2 text-left font-medium">
                   Student
@@ -219,15 +220,8 @@ export function EnrollmentsPage() {
                   </td>
                 </tr>
               ) : (
-                enrollments.map((e, idx) => (
-                  <tr
-                    key={e.id}
-                    className={
-                      idx % 2 === 0
-                        ? "bg-black/5 dark:bg-black/40"
-                        : "bg-transparent"
-                    }
-                  >
+                enrollments.map((e) => (
+                  <tr key={e.id}>
                     <td className="border-b border-[var(--border)] px-3 py-2">
                       {studentLabel(e.student_id)}
                     </td>
@@ -241,6 +235,12 @@ export function EnrollmentsPage() {
                       {e.grade ?? ""}
                     </td>
                     <td className="border-b border-[var(--border)] px-3 py-2 text-right space-x-2">
+                      <Link
+                        className="inline-flex h-8 items-center justify-center rounded-md border border-[var(--border)] bg-transparent px-3 text-xs font-medium text-[var(--text)] hover:bg-black/5 dark:hover:bg-white/5"
+                        to={`/enrollments/${e.id}`}
+                      >
+                        View
+                      </Link>
                       <Button
                         variant="outline"
                         size="sm"

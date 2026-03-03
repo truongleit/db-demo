@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getDepartments } from "../../lib/api";
 
 interface Department {
@@ -19,8 +20,8 @@ export function DepartmentsPage() {
         setError(null);
         const data = await getDepartments();
         setDepartments(data);
-      } catch (e: any) {
-        setError(e.message ?? "Failed to load departments");
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : "Failed to load departments");
       } finally {
         setLoading(false);
       }
@@ -42,8 +43,8 @@ export function DepartmentsPage() {
           All departments
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
-            <thead className="bg-black/5 dark:bg-black/40">
+          <table className="app-table text-sm">
+            <thead>
               <tr>
                 <th className="border-b border-[var(--border)] px-3 py-2 text-left font-medium">
                   ID
@@ -54,13 +55,16 @@ export function DepartmentsPage() {
                 <th className="border-b border-[var(--border)] px-3 py-2 text-left font-medium">
                   Name
                 </th>
+                <th className="border-b border-[var(--border)] px-3 py-2 text-right font-medium">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
                   <td
-                    colSpan={3}
+                    colSpan={4}
                     className="px-3 py-4 text-center text-slate-400"
                   >
                     Loading...
@@ -69,22 +73,15 @@ export function DepartmentsPage() {
               ) : departments.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={3}
+                    colSpan={4}
                     className="px-3 py-4 text-center text-slate-400"
                   >
                     No departments.
                   </td>
                 </tr>
               ) : (
-                departments.map((d, idx) => (
-                  <tr
-                    key={d.id}
-                    className={
-                      idx % 2 === 0
-                        ? "bg-black/5 dark:bg-black/40"
-                        : "bg-transparent"
-                    }
-                  >
+                departments.map((d) => (
+                  <tr key={d.id}>
                     <td className="border-b border-[var(--border)] px-3 py-2">
                       {d.id}
                     </td>
@@ -93,6 +90,14 @@ export function DepartmentsPage() {
                     </td>
                     <td className="border-b border-[var(--border)] px-3 py-2">
                       {d.name}
+                    </td>
+                    <td className="border-b border-[var(--border)] px-3 py-2 text-right">
+                      <Link
+                        className="inline-flex h-8 items-center justify-center rounded-md border border-[var(--border)] bg-transparent px-3 text-xs font-medium text-[var(--text)] hover:bg-black/5 dark:hover:bg-white/5"
+                        to={`/departments/${d.id}`}
+                      >
+                        View
+                      </Link>
                     </td>
                   </tr>
                 ))

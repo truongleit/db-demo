@@ -8,6 +8,26 @@ export interface Course {
   credits: number;
 }
 
+export async function getAllCoursesWithDepartment(departmentId?: number) {
+  let sql = `
+    SELECT
+      c.*,
+      d.name AS department_name,
+      d.code AS department_code
+    FROM courses c
+    JOIN departments d ON c.department_id = d.id
+  `;
+  const params: Array<number> = [];
+
+  if (departmentId) {
+    sql += " WHERE c.department_id = ?";
+    params.push(departmentId);
+  }
+
+  const [rows] = await pool.query(sql, params);
+  return rows;
+}
+
 export async function getAllCourses() {
   const [rows] = await pool.query("SELECT * FROM courses");
   return rows;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { getStudents, createStudent, deleteStudent } from "../../lib/api";
@@ -30,8 +31,8 @@ export function StudentsPage() {
       setError(null);
       const data = await getStudents();
       setStudents(data);
-    } catch (e: any) {
-      setError(e.message ?? "Failed to load students");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to load students");
     } finally {
       setLoading(false);
     }
@@ -59,8 +60,8 @@ export function StudentsPage() {
         enrollment_year: "",
       });
       await load();
-    } catch (e: any) {
-      setError(e.message ?? "Failed to create student");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to create student");
     }
   }
 
@@ -69,8 +70,8 @@ export function StudentsPage() {
     try {
       await deleteStudent(id);
       await load();
-    } catch (e: any) {
-      setError(e.message ?? "Failed to delete student");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to delete student");
     }
   }
 
@@ -141,8 +142,8 @@ export function StudentsPage() {
           All students
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
-            <thead className="bg-black/5 dark:bg-black/40">
+          <table className="app-table text-sm">
+            <thead>
               <tr>
                 <th className="border-b border-[var(--border)] px-3 py-2 text-left font-medium">
                   Name
@@ -181,15 +182,8 @@ export function StudentsPage() {
                   </td>
                 </tr>
               ) : (
-                students.map((s, idx) => (
-                  <tr
-                    key={s.id}
-                    className={
-                      idx % 2 === 0
-                        ? "bg-black/5 dark:bg-black/40"
-                        : "bg-transparent"
-                    }
-                  >
+                students.map((s) => (
+                  <tr key={s.id}>
                     <td className="border-b border-[var(--border)] px-3 py-2">
                       {s.first_name} {s.last_name}
                     </td>
@@ -203,6 +197,12 @@ export function StudentsPage() {
                       {s.enrollment_year}
                     </td>
                     <td className="border-b border-[var(--border)] px-3 py-2 text-right space-x-2">
+                      <Link
+                        className="inline-flex h-8 items-center justify-center rounded-md border border-[var(--border)] bg-transparent px-3 text-xs font-medium text-[var(--text)] hover:bg-black/5 dark:hover:bg-white/5"
+                        to={`/students/${s.id}`}
+                      >
+                        View
+                      </Link>
                       <Button
                         variant="outline"
                         size="sm"

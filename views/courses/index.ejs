@@ -17,7 +17,7 @@
       <tr>
         <td><%= c.code %></td>
         <td><%= c.title %></td>
-        <td><%= c.department_id %></td>
+        <td><%= c.department_name || c.department_id %></td>
         <td><%= c.credits %></td>
         <td>
           <a href="/courses/<%= c.id %>/edit">Edit</a>

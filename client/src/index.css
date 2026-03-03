@@ -14,6 +14,9 @@
   --text: #e5e7eb;
   --muted: #94a3b8;
   --accent: #38bdf8;
+  --table-header-bg: rgba(255, 255, 255, 0.04);
+  --table-row-even-bg: rgba(255, 255, 255, 0.02);
+  --table-row-hover-bg: rgba(56, 189, 248, 0.10);
 }
 
 :root[data-theme="light"] {
@@ -24,6 +27,9 @@
   --text: #0f172a;
   --muted: #6b7280;
   --accent: #2563eb;
+  --table-header-bg: #f8fafc;
+  --table-row-even-bg: #f1f5f9;
+  --table-row-hover-bg: #e0f2fe;
 }
 
 body {
@@ -55,4 +61,44 @@ body {
   max-width: 72rem;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+}
+
+/* Tables */
+.app-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text);
+}
+
+.app-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--table-header-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.app-table tbody td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.625rem 0.75rem;
+  vertical-align: middle;
+}
+
+.app-table tbody tr:nth-child(even) {
+  background: var(--table-row-even-bg);
+}
+
+.app-table tbody tr:hover {
+  background: var(--table-row-hover-bg);
+}
+
+.app-table td.num,
+.app-table th.num {
+  font-variant-numeric: tabular-nums;
 }

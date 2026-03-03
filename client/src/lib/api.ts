@@ -27,9 +27,17 @@ async function apiRequest(path: string, options?: RequestInit) {
   return body;
 }
 
+function toJsonBody(payload: unknown) {
+  return JSON.stringify(payload);
+}
+
 // Students
 export function getStudents() {
   return apiRequest("/api/students");
+}
+
+export function getStudent(id: number) {
+  return apiRequest(`/api/students/${id}`);
 }
 
 export function createStudent(payload: {
@@ -41,7 +49,23 @@ export function createStudent(payload: {
 }) {
   return apiRequest("/api/students", {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: toJsonBody(payload),
+  });
+}
+
+export function updateStudent(
+  id: number,
+  payload: Partial<{
+    first_name: string;
+    last_name: string;
+    email: string;
+    department_id: number;
+    enrollment_year: number;
+  }>
+) {
+  return apiRequest(`/api/students/${id}`, {
+    method: "PUT",
+    body: toJsonBody(payload),
   });
 }
 
@@ -54,6 +78,10 @@ export function getCourses() {
   return apiRequest("/api/courses");
 }
 
+export function getCourse(id: number) {
+  return apiRequest(`/api/courses/${id}`);
+}
+
 export function createCourse(payload: {
   code: string;
   title: string;
@@ -62,7 +90,22 @@ export function createCourse(payload: {
 }) {
   return apiRequest("/api/courses", {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: toJsonBody(payload),
+  });
+}
+
+export function updateCourse(
+  id: number,
+  payload: Partial<{
+    code: string;
+    title: string;
+    department_id: number;
+    credits: number;
+  }>
+) {
+  return apiRequest(`/api/courses/${id}`, {
+    method: "PUT",
+    body: toJsonBody(payload),
   });
 }
 
@@ -75,9 +118,18 @@ export function getDepartments() {
   return apiRequest("/api/departments");
 }
 
+export function getDepartment(id: number) {
+  return apiRequest(`/api/departments/${id}`);
+}
+
 // Enrollments
 export function getEnrollments() {
   return apiRequest("/api/enrollments");
+}
+
+export async function getEnrollmentFromList(id: number) {
+  const enrollments = (await getEnrollments()) as Array<{ id: number }>;
+  return enrollments.find((e) => e.id === id) ?? null;
 }
 
 export function createEnrollment(payload: {
@@ -88,7 +140,7 @@ export function createEnrollment(payload: {
 }) {
   return apiRequest("/api/enrollments", {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: toJsonBody(payload),
   });
 }
 

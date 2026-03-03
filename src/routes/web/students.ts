@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createStudent,
   deleteStudent,
-  getAllStudents,
+  getAllStudentsWithDepartment,
   getStudentById,
   updateStudent,
 } from "../../models/students";
@@ -11,7 +11,7 @@ export const webStudentsRouter = Router();
 
 webStudentsRouter.get("/", async (req, res) => {
   const error = req.query.error as string | undefined;
-  const students = await getAllStudents();
+  const students = await getAllStudentsWithDepartment();
   res.render("students/index", { students, error });
 });
 

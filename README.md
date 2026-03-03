@@ -162,6 +162,15 @@ curl "http://localhost:3000/api/enrollments?student_id=1"
 
 6. Try deleting a student that has enrollments – you should get a `409` error indicating they cannot be deleted while enrollments exist.
 
+### Joins in this demo
+
+To keep the demo realistic, some list endpoints use SQL joins:
+
+- **Students list** (`GET /api/students`): joins `students` with `departments` to return `department_name` and `department_code` alongside each student.
+- **Enrollments list** (`GET /api/enrollments`): joins `enrollments` with `students` and `courses` so each row includes `student_name`, `student_email`, `course_code`, and `course_title`.
+
+This allows both the minimal HTML frontend and the React frontend to show meaningful labels instead of raw foreign key IDs.
+
 ### React + shadcn frontend (second demo)
 
 This repo also includes a modern React frontend demo in the `client/` folder, built with:

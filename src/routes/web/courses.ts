@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createCourse,
   deleteCourse,
-  getAllCourses,
+  getAllCoursesWithDepartment,
   getCourseById,
   updateCourse,
 } from "../../models/courses";
@@ -11,7 +11,7 @@ export const webCoursesRouter = Router();
 
 webCoursesRouter.get("/", async (req, res) => {
   const error = req.query.error as string | undefined;
-  const courses = await getAllCourses();
+  const courses = await getAllCoursesWithDepartment();
   res.render("courses/index", { courses, error });
 });
 

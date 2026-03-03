@@ -3,13 +3,17 @@ import {
   createCourse,
   deleteCourse,
   getAllCourses,
+  getAllCoursesWithDepartment,
   getCourseById,
   updateCourse,
 } from "../models/courses";
 
-export async function listCourses(_req: Request, res: Response) {
+export async function listCourses(req: Request, res: Response) {
   try {
-    const courses = await getAllCourses();
+    const departmentId = req.query.department_id
+      ? Number(req.query.department_id)
+      : undefined;
+    const courses = await getAllCoursesWithDepartment(departmentId);
     res.json({ data: courses, error: null });
   } catch (err: any) {
     res.status(500).json({ data: null, error: { message: err.message } });

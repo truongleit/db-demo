@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
   createEnrollment,
   deleteEnrollment,
-  getAllEnrollments,
+  getAllEnrollmentsWithDetails,
 } from "../models/enrollments";
 
 export async function listEnrollments(req: Request, res: Response) {
@@ -16,7 +16,7 @@ export async function listEnrollments(req: Request, res: Response) {
         ? Number(req.query.course_id)
         : undefined;
 
-    const enrollments = await getAllEnrollments({
+    const enrollments = await getAllEnrollmentsWithDetails({
       student_id: studentId ?? undefined,
       course_id: courseId ?? undefined,
     });

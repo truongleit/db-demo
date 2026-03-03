@@ -9,6 +9,26 @@ export interface Student {
   enrollment_year: number;
 }
 
+export async function getAllStudentsWithDepartment(departmentId?: number) {
+  let sql = `
+    SELECT 
+      s.*,
+      d.name AS department_name,
+      d.code AS department_code
+    FROM students s
+    JOIN departments d ON s.department_id = d.id
+  `;
+  const params: Array<number> = [];
+
+  if (departmentId) {
+    sql += " WHERE s.department_id = ?";
+    params.push(departmentId);
+  }
+
+  const [rows] = await pool.query(sql, params);
+  return rows;
+}
+
 export async function getAllStudents(departmentId?: number) {
   if (departmentId) {
     const [rows] = await pool.query(
