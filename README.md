@@ -162,9 +162,42 @@ curl "http://localhost:3000/api/enrollments?student_id=1"
 
 6. Try deleting a student that has enrollments – you should get a `409` error indicating they cannot be deleted while enrollments exist.
 
-### Adding a frontend later
+### React + shadcn frontend (second demo)
 
-- Keep this backend in the root and add a separate `client/` folder for React or Vue.
-- Point your SPA dev server (e.g. Vite) at a different port such as `http://localhost:5173`.
-- The API already supports CORS and is neatly namespaced under `/api`, so the frontend can consume it without changing backend routes.
+This repo also includes a modern React frontend demo in the `client/` folder, built with:
+
+- React + TypeScript (Vite)
+- Tailwind CSS (v4)
+- A small set of shadcn-style UI primitives (button, input, layout shell)
+
+The frontend consumes the same `/api/...` endpoints to demonstrate CRUD for students and courses, plus read-only departments and enrollments (with enroll/unenroll).
+
+#### Running backend + frontend together
+
+1. **Start the database and backend API** (from repo root):
+
+```bash
+docker compose up -d
+npm install       # if not done already
+npm run dev       # backend on http://localhost:3000
+```
+
+2. **Start the React frontend**:
+
+```bash
+cd client
+npm install       # first time only
+npm run dev       # frontend on http://localhost:5173
+```
+
+3. **Open the frontend**:
+
+- Visit `http://localhost:5173` in your browser.
+- Use the navigation on the left to switch between:
+  - **Students** – list existing students, create new ones, and delete.
+  - **Courses** – list/create/delete courses.
+  - **Departments** – read-only table of departments.
+  - **Enrollments** – list enrollments and enroll a student into a course.
+
+Because the API lives under `/api/...` and CORS is configured for `http://localhost:5173`, the frontend can call the backend directly without any proxy configuration.
 
