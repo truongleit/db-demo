@@ -1,0 +1,31 @@
+### Health
+GET http://localhost:3000/api/health
+
+### List all students
+GET http://localhost:3000/api/students
+
+### Create a student
+POST http://localhost:3000/api/students
+Content-Type: application/json
+
+{
+  "first_name": "Eve",
+  "last_name": "Ho",
+  "email": "eve.ho@example.edu",
+  "department_id": 1,
+  "enrollment_year": 2025
+}
+
+### Enroll student 1 in course 2
+POST http://localhost:3000/api/enrollments
+Content-Type: application/json
+
+{
+  "student_id": 1,
+  "course_id": 2,
+  "semester": "2025-Fall"
+}
+
+### List enrollments for student 1
+GET http://localhost:3000/api/enrollments?student_id=1
+

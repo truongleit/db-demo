@@ -1,0 +1,272 @@
+{
+  "info": {
+    "name": "Student DB Demo API",
+    "_postman_id": "00000000-0000-0000-0000-000000000001",
+    "description": "Postman collection for the Node.js + MySQL student CRUD demo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Students - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        }
+      }
+    },
+    {
+      "name": "Students - Get by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Students - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Eve\",\n  \"last_name\": \"Ho\",\n  \"email\": \"eve.ho@example.edu\",\n  \"department_id\": 1,\n  \"enrollment_year\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        }
+      }
+    },
+    {
+      "name": "Students - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Eve\",\n  \"last_name\": \"Ho\",\n  \"email\": \"eve.ho@example.edu\",\n  \"department_id\": 1,\n  \"enrollment_year\": 2026\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Students - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Courses - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/courses",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses"]
+        }
+      }
+    },
+    {
+      "name": "Courses - Get by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/courses/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Courses - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"CS301\",\n  \"title\": \"Algorithms\",\n  \"department_id\": 1,\n  \"credits\": 4\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/courses",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses"]
+        }
+      }
+    },
+    {
+      "name": "Courses - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"CS301\",\n  \"title\": \"Advanced Algorithms\",\n  \"department_id\": 1,\n  \"credits\": 4\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/courses/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Courses - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/courses/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "courses", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Departments - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments"]
+        }
+      }
+    },
+    {
+      "name": "Departments - Get by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Enrollments - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/enrollments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "enrollments"]
+        }
+      }
+    },
+    {
+      "name": "Enrollments - List by student",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/enrollments?student_id=1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "enrollments"],
+          "query": [
+            {
+              "key": "student_id",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Enrollments - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 1,\n  \"course_id\": 2,\n  \"semester\": \"2025-Fall\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/enrollments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "enrollments"]
+        }
+      }
+    },
+    {
+      "name": "Enrollments - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/enrollments/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "enrollments", ":id"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
+
