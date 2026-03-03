@@ -1,0 +1,21 @@
+<h2>Edit student</h2>
+
+<form action="/students/<%= student.id %>/edit" method="post">
+  <label for="first_name">First name</label>
+  <input id="first_name" name="first_name" value="<%= student.first_name %>" required />
+
+  <label for="last_name">Last name</label>
+  <input id="last_name" name="last_name" value="<%= student.last_name %>" required />
+
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" value="<%= student.email %>" required />
+
+  <label for="department_id">Department ID</label>
+  <input id="department_id" name="department_id" type="number" value="<%= student.department_id %>" required />
+
+  <label for="enrollment_year">Enrollment year</label>
+  <input id="enrollment_year" name="enrollment_year" type="number" value="<%= student.enrollment_year %>" required />
+
+  <button type="submit">Save</button>
+</form>
+

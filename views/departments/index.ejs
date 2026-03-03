@@ -1,0 +1,21 @@
+<h2>Departments</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Code</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% departments.forEach(function (d) { %>
+      <tr>
+        <td><%= d.id %></td>
+        <td><%= d.code %></td>
+        <td><%= d.name %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+

@@ -1,0 +1,33 @@
+<h2>Students</h2>
+
+<p><a href="/students/new">Create new student</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Enrollment year</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% students.forEach(function (s) { %>
+      <tr>
+        <td><%= s.first_name %> <%= s.last_name %></td>
+        <td><%= s.email %></td>
+        <td><%= s.department_name || s.department_id %></td>
+        <td><%= s.enrollment_year %></td>
+        <td>
+          <a href="/students/<%= s.id %>/edit">Edit</a>
+          |
+          <form action="/students/<%= s.id %>/delete" method="post" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+

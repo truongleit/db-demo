@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student DB Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Student DB Demo</h1>
+      <nav>
+        <a href="/students">Students</a>
+        <a href="/courses">Courses</a>
+        <a href="/departments">Departments</a>
+        <a href="/enrollments">Enrollments</a>
+      </nav>
+      <% if (typeof error !== "undefined" && error) { %>
+        <div class="flash flash-error"><%= error %></div>
+      <% } %>
+      <% if (typeof message !== "undefined" && message) { %>
+        <div class="flash flash-ok"><%= message %></div>
+      <% } %>
+    </header>
+    <main>
+      <%- body %>
+    </main>
+  </body>
+</html>
+

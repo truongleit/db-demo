@@ -1,0 +1,33 @@
+<h2>Courses</h2>
+
+<p><a href="/courses/new">Create new course</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th>Department</th>
+      <th>Credits</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% courses.forEach(function (c) { %>
+      <tr>
+        <td><%= c.code %></td>
+        <td><%= c.title %></td>
+        <td><%= c.department_id %></td>
+        <td><%= c.credits %></td>
+        <td>
+          <a href="/courses/<%= c.id %>/edit">Edit</a>
+          |
+          <form action="/courses/<%= c.id %>/delete" method="post" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+

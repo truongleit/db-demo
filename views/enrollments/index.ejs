@@ -1,0 +1,31 @@
+<h2>Enrollments</h2>
+
+<p><a href="/enrollments/new">New enrollment</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Semester</th>
+      <th>Grade</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% enrollments.forEach(function (e) { %>
+      <tr>
+        <td><%= e.student_name || e.student_id %></td>
+        <td><%= e.course_title || e.course_id %></td>
+        <td><%= e.semester %></td>
+        <td><%= e.grade || '' %></td>
+        <td>
+          <form action="/enrollments/<%= e.id %>/delete" method="post" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+

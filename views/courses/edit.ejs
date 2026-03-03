@@ -1,0 +1,24 @@
+<h2>Edit course</h2>
+
+<form action="/courses/<%= course.id %>/edit" method="post">
+  <label for="code">Code</label>
+  <input id="code" name="code" value="<%= course.code %>" required />
+
+  <label for="title">Title</label>
+  <input id="title" name="title" value="<%= course.title %>" required />
+
+  <label for="department_id">Department ID</label>
+  <input
+    id="department_id"
+    name="department_id"
+    type="number"
+    value="<%= course.department_id %>"
+    required
+  />
+
+  <label for="credits">Credits</label>
+  <input id="credits" name="credits" type="number" value="<%= course.credits %>" required />
+
+  <button type="submit">Save</button>
+</form>
+
